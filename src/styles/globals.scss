@@ -1,0 +1,18 @@
+@use './variables' as variables;
+.flex {
+  display: flex;
+}
+
+.row {
+  width: 100%;
+}
+
+.container {
+  max-width: 1000px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.green {
+  color: variables.$primary-color;
+}
