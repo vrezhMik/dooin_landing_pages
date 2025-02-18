@@ -126,7 +126,6 @@ const selectedIndex = ref(0)
       align-items: center;
       margin-bottom: 64px;
       button {
-        min-width: 100px;
         width: 100%;
         font-size: 1rem;
         color: variables.$text-invert;
@@ -173,6 +172,21 @@ const selectedIndex = ref(0)
       &-description {
         font-size: 1rem;
         font-weight: 200;
+      }
+    }
+  }
+}
+
+@media (max-width: 570px) {
+  .features {
+    &-info {
+      max-width: 90%;
+      &--menu {
+        flex-wrap: wrap;
+        row-gap: 10px;
+        button {
+          width: 30%;
+        }
       }
     }
   }
