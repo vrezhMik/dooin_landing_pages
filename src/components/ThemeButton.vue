@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import ArrowIcon from './Icons/ArrowIcon.vue'
 const props = defineProps(['name'])
 </script>

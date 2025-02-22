@@ -1,4 +1,4 @@
-<script></script>
+<script lang="ts"></script>
 <template>
   <div class="about" id="about">
     <div class="about-info">
@@ -57,21 +57,6 @@
   }
 }
 
-@media (max-width: 1200px) {
-  .about {
-  }
-}
-
-@media (max-width: 1100px) {
-  .about {
-  }
-}
-
-@media (max-width: 950px) {
-  .about {
-  }
-}
-
 @media (max-width: 740px) {
   .about {
     &-info {
@@ -87,7 +72,8 @@
 
 @media (max-width: 490px) {
   .about {
-    padding-bottom: 20px;
+    padding-bottom: 30px;
+    padding-top: 30px;
     &-info {
       max-width: 80%;
       &--description {
@@ -98,6 +84,11 @@
           font-weight: 500;
           font-size: 1.8rem;
         }
+      }
+    }
+    &-story {
+      p {
+        width: 90%;
       }
     }
   }

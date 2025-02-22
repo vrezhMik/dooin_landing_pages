@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 import PlusIcon from './Icons/PlusIcon.vue'
 
@@ -104,7 +104,7 @@ const toggleAnswer = (index) => {
     padding: 1.6rem;
     margin-top: 1rem;
     border-radius: 1.6rem;
-    border: 1px solid variables.$primary-grey;
+    border: 2px solid variables.$theme-color-dark;
     overflow: hidden;
 
     &--question {
@@ -166,7 +166,7 @@ const toggleAnswer = (index) => {
   .faq {
     padding: 2rem;
     &-info {
-      max-width: 80%;
+      max-width: 100%;
       &--title {
         h2 {
           font-size: 1.8rem;

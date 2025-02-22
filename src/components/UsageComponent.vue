@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 
 const selectedIndex = ref(0)
@@ -14,8 +14,12 @@ const selectedIndex = ref(0)
         <h2>Find or Offer Help – for Any Everyday Task</h2>
       </div>
       <div class="usage-info--menu flex">
-        <button @click="selectedIndex = 0">Offer a Job</button>
-        <button @click="selectedIndex = 1">Find a Job</button>
+        <button @click="selectedIndex = 0" :class="{ active: selectedIndex === 0 }">
+          Offer a Job
+        </button>
+        <button @click="selectedIndex = 1" :class="{ active: selectedIndex === 1 }">
+          Find a Job
+        </button>
       </div>
     </div>
     <div v-if="selectedIndex == 0">
@@ -125,6 +129,9 @@ const selectedIndex = ref(0)
 @use './../styles/variables' as variables;
 .usage {
   margin-bottom: 100px;
+  border: 1px solid #e3e3e3;
+  padding: 30px 0;
+  border-radius: 30px;
   &-info {
     max-width: 50%;
     margin: 0 auto;
@@ -160,7 +167,7 @@ const selectedIndex = ref(0)
         border-radius: 15px;
         text-transform: capitalize;
         font-weight: 900;
-        transition: 0.4s ease;
+        // transition: 0.4s ease;
 
         &:hover {
           color: variables.$subcolor-light;
@@ -226,6 +233,9 @@ const selectedIndex = ref(0)
     &-info {
       &--menu {
         margin-bottom: 30px;
+        button {
+          width: 41%;
+        }
       }
     }
     &-block {
@@ -238,7 +248,7 @@ const selectedIndex = ref(0)
         }
       }
       &--content {
-        width: 70%;
+        width: 100%;
         text-align: center;
       }
     }
@@ -259,5 +269,9 @@ const selectedIndex = ref(0)
       }
     }
   }
+}
+
+.active {
+  color: variables.$subcolor-light !important;
 }
 </style>

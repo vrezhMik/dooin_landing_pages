@@ -1,4 +1,4 @@
-<script></script>
+<script lang="ts" scoped></script>
 <template>
   <div class="installation">
     <div class="installation-info">
@@ -71,6 +71,7 @@
       h2 {
         font-size: 2.2rem;
         width: 70%;
+        color: variables.$background-invert;
       }
     }
   }
@@ -161,8 +162,9 @@
       &--block {
         width: 80%;
         height: 250px;
+        column-gap: 5px;
         span {
-          font-size: 5rem;
+          font-size: 10rem;
         }
         h2 {
           font-size: 1.2rem;

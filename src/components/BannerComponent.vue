@@ -1,5 +1,4 @@
-<script setup>
-import ButtonComponent from './ButtonComponent.vue'
+<script lang="ts" setup>
 import ThemeButton from './ThemeButton.vue'
 </script>
 
@@ -22,6 +21,7 @@ import ThemeButton from './ThemeButton.vue'
 </template>
 
 <style scoped lang="scss">
+@use './../styles/variables' as variables;
 .banner {
   background: hsla(226, 63%, 95%, 1);
   background: linear-gradient(270deg, hsla(226, 63%, 95%, 1) 0%, #fafafa 100%);
@@ -47,6 +47,8 @@ import ThemeButton from './ThemeButton.vue'
     align-items: center;
     column-gap: 12px;
     margin-bottom: 40px;
+    color: variables.$background-invert;
+
     h3 {
       font-size: 30px;
       font-weight: 400;
@@ -59,6 +61,8 @@ import ThemeButton from './ThemeButton.vue'
 
 @media (max-width: 470px) {
   .banner {
+    padding: 30px 25px;
+
     &-title {
       font-size: 2.3rem;
     }

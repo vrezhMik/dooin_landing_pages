@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import Button from './ButtonComponent.vue'
 import HamburgerIcon from './Icons/HamburgerIcon.vue'
 import { ref, onMounted, onUnmounted } from 'vue'

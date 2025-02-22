@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 const menuData = [
   { href: '#product', name: 'product' },
   { href: '#about', name: 'about' },

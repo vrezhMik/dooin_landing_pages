@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import BannerComponent from './BannerComponent.vue'
 import FeaturesComponent from './FeaturesComponent.vue'
 import UsageComponent from './UsageComponent.vue'
