@@ -29,6 +29,7 @@ import ThemeButton from './ThemeButton.vue'
   background: -webkit-linear-gradient(270deg, hsla(226, 63%, 95%, 1) 0%, #fafafa 100%);
   padding: 76px 76px 32px 76px;
   border-radius: 30px;
+
   &-title {
     text-align: center;
     font-size: 3.8rem;

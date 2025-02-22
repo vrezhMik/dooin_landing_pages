@@ -1,11 +1,38 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const selectedIndex = ref(0)
+
+const screenWidth = ref(window.innerWidth)
+
+const updateScreenWidth = () => {
+  screenWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  window.addEventListener('resize', updateScreenWidth)
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', updateScreenWidth)
+})
+
+const motionProps = computed(() => {
+  if (screenWidth.value <= 470) {
+    return {
+      initial: { opacity: 0, y: 200 },
+      visibleOnce: { opacity: 1, y: 0 },
+    }
+  } else {
+    return {
+      initial: { opacity: 0, y: 400 },
+      visibleOnce: { opacity: 1, y: 0 },
+    }
+  }
+})
 </script>
 
 <template>
-  <div class="features container" id="product">
+  <div class="features container" id="product" v-motion="motionProps">
     <div class="features-info">
       <div class="features-info--title">
         <p></p>
@@ -102,6 +129,7 @@ const selectedIndex = ref(0)
   background-color: variables.$text-invert;
   border-radius: 30px;
   padding: 32px;
+  transition: 2s ease;
   &-info {
     max-width: 50%;
     margin: 0 auto;

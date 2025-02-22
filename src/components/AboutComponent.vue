@@ -1,6 +1,35 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+
+const screenWidth = ref(window.innerWidth)
+
+const updateScreenWidth = () => {
+  screenWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  window.addEventListener('resize', updateScreenWidth)
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', updateScreenWidth)
+})
+
+const motionProps = computed(() => {
+  if (screenWidth.value <= 470) {
+    return {
+      initial: { opacity: 0, y: 200 },
+      visibleOnce: { opacity: 1, y: 0 },
+    }
+  } else {
+    return {
+      initial: { opacity: 0, y: 50 },
+      visibleOnce: { opacity: 1, y: 0 },
+    }
+  }
+})
+</script>
 <template>
-  <div class="about" id="about">
+  <div class="about" id="about" v-motion="motionProps">
     <div class="about-info">
       <div class="about-info--description">
         <h2>Gemeinsam mehr erreichen – die Idee hinter Dooin</h2>
@@ -25,6 +54,8 @@
   background-color: variables.$subcolor-dark;
   padding: 80px 0;
   margin-bottom: 80px;
+  transition: 2s ease;
+
   &-info {
     max-width: 50%;
     margin: 0 auto;

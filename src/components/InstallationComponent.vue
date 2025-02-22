@@ -1,6 +1,11 @@
 <script lang="ts" setup></script>
 <template>
-  <div class="installation">
+  <div
+    class="installation"
+    v-motion
+    :initial="{ opacity: 0, y: 200 }"
+    :visibleOnce="{ opacity: 1, y: 0 }"
+  >
     <div class="installation-info">
       <div class="installation-info--description">
         <h2>Wie es funktioniert – Nur 3 Klicks!</h2>
@@ -28,6 +33,7 @@
 
 .installation {
   background-color: variables.$background-invert;
+  transition: 2s ease;
   padding: 80px 0;
   &-info {
     max-width: 50%;

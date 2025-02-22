@@ -5,7 +5,12 @@ const selectedIndex = ref(0)
 </script>
 
 <template>
-  <div class="usage container">
+  <div
+    class="usage container"
+    v-motion
+    :initial="{ opacity: 0, y: 200 }"
+    :visibleOnce="{ opacity: 1, y: 0 }"
+  >
     <div class="usage-info">
       <div class="usage-info-title">
         <p></p>
@@ -131,6 +136,7 @@ const selectedIndex = ref(0)
   margin-bottom: 100px;
   border: 1px solid #e3e3e3;
   padding: 30px 0;
+  transition: 2s ease;
   border-radius: 30px;
   &-info {
     max-width: 50%;

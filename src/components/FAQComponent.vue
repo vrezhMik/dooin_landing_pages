@@ -10,7 +10,12 @@ const toggleAnswer = (index: number) => {
 </script>
 
 <template>
-  <div class="faq container">
+  <div
+    class="faq container"
+    v-motion
+    :initial="{ opacity: 0, y: 200 }"
+    :visibleOnce="{ opacity: 1, y: 0 }"
+  >
     <div class="faq-info">
       <div class="faq-info--title">
         <h2>Häufig gestellte Fragen</h2>
@@ -82,6 +87,7 @@ const toggleAnswer = (index: number) => {
   padding: 4.8rem;
   color: variables.$theme-color-dark;
   border-radius: 30px;
+  transition: 2s ease;
   margin-bottom: 50px;
   &-info {
     max-width: 50%;
