@@ -1,4 +1,4 @@
-<script lang="ts" scoped></script>
+<script lang="ts" setup></script>
 <template>
   <div class="installation">
     <div class="installation-info">

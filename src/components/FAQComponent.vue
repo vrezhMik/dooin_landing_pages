@@ -2,9 +2,9 @@
 import { ref } from 'vue'
 import PlusIcon from './Icons/PlusIcon.vue'
 
-const openIndexes = ref({})
+const openIndexes = ref<Record<number, boolean>>({})
 
-const toggleAnswer = (index) => {
+const toggleAnswer = (index: number) => {
   openIndexes.value[index] = !openIndexes.value[index]
 }
 </script>

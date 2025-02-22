@@ -1,4 +1,4 @@
-<script lang="ts"></script>
+<script lang="ts" setup></script>
 <template>
   <svg
     width="800px"
