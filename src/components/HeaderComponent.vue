@@ -20,8 +20,7 @@ const toggleHamburgeMenu = () => {
   hamburgerMenuStatus.value = !hamburgerMenuStatus.value
 }
 
-// Function to handle smooth scrolling
-const scrollToSection = (target) => {
+const scrollToSection = (target: string) => {
   setTimeout(() => {
     const element = document.querySelector(target)
     if (element) {
