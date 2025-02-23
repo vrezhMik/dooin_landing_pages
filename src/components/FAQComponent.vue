@@ -2,10 +2,11 @@
 import { ref } from 'vue'
 import PlusIcon from './Icons/PlusIcon.vue'
 
-const openIndexes = ref<Record<number, boolean>>({})
+const openIndexes = ref(-1)
 
 const toggleAnswer = (index: number) => {
-  openIndexes.value[index] = !openIndexes.value[index]
+  if (index == openIndexes.value) openIndexes.value = -1
+  else openIndexes.value = index
 }
 </script>
 
@@ -26,10 +27,12 @@ const toggleAnswer = (index: number) => {
       <div class="row faq-block--question flex">
         <div class="faq-block--question-title">How Does Dooin Work?</div>
         <div class="faq-block--question-button">
-          <button @click="toggleAnswer(1)"><PlusIcon /></button>
+          <button @click="toggleAnswer(1)" :class="{ openButton: openIndexes == 1 }">
+            <PlusIcon />
+          </button>
         </div>
       </div>
-      <div class="row faq-block--answer" :class="{ open: openIndexes[1] }">
+      <div class="row faq-block--answer" :class="{ open: openIndexes == 1 }">
         <p>
           You can post tasks or look for tasks to help with. Find the right helper and complete the
           task.
@@ -41,10 +44,12 @@ const toggleAnswer = (index: number) => {
       <div class="row faq-block--question flex">
         <div class="faq-block--question-title">How Much Does It Cost?</div>
         <div class="faq-block--question-button">
-          <button @click="toggleAnswer(2)"><PlusIcon /></button>
+          <button @click="toggleAnswer(2)" :class="{ openButton: openIndexes == 2 }">
+            <PlusIcon />
+          </button>
         </div>
       </div>
-      <div class="row faq-block--answer" :class="{ open: openIndexes[2] }">
+      <div class="row faq-block--answer" :class="{ open: openIndexes == 2 }">
         <p>Dooin is free! You only pay for the help you get or give.</p>
       </div>
     </div>
@@ -52,10 +57,12 @@ const toggleAnswer = (index: number) => {
       <div class="row faq-block--question flex">
         <div class="faq-block--question-title">Is Dooin Safe?</div>
         <div class="faq-block--question-button">
-          <button @click="toggleAnswer(3)"><PlusIcon /></button>
+          <button @click="toggleAnswer(3)" :class="{ openButton: openIndexes == 3 }">
+            <PlusIcon />
+          </button>
         </div>
       </div>
-      <div class="row faq-block--answer" :class="{ open: openIndexes[3] }">
+      <div class="row faq-block--answer" :class="{ open: openIndexes == 3 }">
         <p>
           Yes! All profiles on Dooin are verified, and you can see real reviews from other users.
           This way, you can safely find the right person for your task.
@@ -66,10 +73,12 @@ const toggleAnswer = (index: number) => {
       <div class="row faq-block--question flex">
         <div class="faq-block--question-title">How Do I Pay for a Completed Task?</div>
         <div class="faq-block--question-button">
-          <button @click="toggleAnswer(4)"><PlusIcon /></button>
+          <button @click="toggleAnswer(4)" :class="{ openButton: openIndexes == 4 }">
+            <PlusIcon />
+          </button>
         </div>
       </div>
-      <div class="row faq-block--answer" :class="{ open: openIndexes[4] }">
+      <div class="row faq-block--answer" :class="{ open: openIndexes == 4 }">
         <p>
           Payment is made directly between the task giver and the helper – you decide how to handle
           it. Dooin takes no commission or fees.
@@ -134,7 +143,7 @@ const toggleAnswer = (index: number) => {
           border: none;
           background: transparent;
           cursor: pointer;
-
+          transition: 0.5s ease;
           svg {
             height: 100%;
             width: 100%;
@@ -192,5 +201,9 @@ const toggleAnswer = (index: number) => {
       }
     }
   }
+}
+
+.openButton {
+  transform: rotateZ(45deg);
 }
 </style>

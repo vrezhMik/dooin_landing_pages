@@ -27,130 +27,131 @@ const selectedIndex = ref(0)
         </button>
       </div>
     </div>
-    <div v-if="selectedIndex == 0">
-      <div class="usage-block flex">
-        <div class="usage-block--image">
-          <img src="./../assets/block2.webp" alt="" />
-        </div>
-        <div class="usage-block--content flex">
-          <div class="usage-block--content-title">
-            <h3>Schnelle Reinigung Deiner Wohnung</h3>
+
+    <transition name="fade" mode="out-in">
+      <div :key="selectedIndex">
+        <div v-if="selectedIndex === 0">
+          <div class="usage-block flex">
+            <div class="usage-block--image">
+              <img src="./../assets/block2.webp" alt="" />
+            </div>
+            <div class="usage-block--content flex">
+              <div class="usage-block--content-title">
+                <h3>Schnelle Reinigung Deiner Wohnung</h3>
+              </div>
+              <div class="usage-block--content-description">
+                <p>
+                  No time to clean your apartment? Post the task and quickly find someone who can
+                  help you clean – whether it’s a quick sweep or a thorough cleaning.
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="usage-block--content-description">
-            <p>
-              No time to clean your apartment? Post the task and quickly find someone who can help
-              you clean – whether it’s a quick sweep or a thorough cleaning.
-            </p>
+          <div class="usage-block flex image-left">
+            <div class="usage-block--image">
+              <img src="./../assets/block2.webp" alt="" />
+            </div>
+            <div class="usage-block--content flex">
+              <div class="usage-block--content-title">
+                <h3>Einkäufe Erledigen lassen</h3>
+              </div>
+              <div class="usage-block--content-description">
+                <p>
+                  Need groceries or other items urgently but don’t have time? Have a tasker do your
+                  shopping and bring the goods directly to your door.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="usage-block flex">
+            <div class="usage-block--image">
+              <img src="./../assets/block2.webp" alt="" />
+            </div>
+            <div class="usage-block--content flex">
+              <div class="usage-block--content-title">
+                <h3>Freiwillige Hilfe für die Nachbarschaft</h3>
+              </div>
+              <div class="usage-block--content-description">
+                <p>
+                  Organize volunteer help for neighbors – such as cleaning out, shopping for
+                  seniors, or supporting refugee initiatives.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="selectedIndex === 1">
+          <div class="usage-block flex">
+            <div class="usage-block--image">
+              <img src="./../assets/block2.webp" alt="" />
+            </div>
+            <div class="usage-block--content flex">
+              <div class="usage-block--content-title">
+                <h3>Do Shopping for Others</h3>
+              </div>
+              <div class="usage-block--content-description">
+                <p>
+                  Have time and enjoy shopping? Help your neighbors with their shopping and earn
+                  some money.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="usage-block flex image-left">
+            <div class="usage-block--image">
+              <img src="./../assets/block2.webp" alt="" />
+            </div>
+            <div class="usage-block--content flex">
+              <div class="usage-block--content-title">
+                <h3>Tech Support for Seniors</h3>
+              </div>
+              <div class="usage-block--content-description">
+                <p>
+                  Assist elderly people with their smartphones or setting up devices. Easy and
+                  direct through the app.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="usage-block flex">
+            <div class="usage-block--image">
+              <img src="./../assets/block2.webp" alt="" />
+            </div>
+            <div class="usage-block--content flex">
+              <div class="usage-block--content-title">
+                <h3>Help with Moving</h3>
+              </div>
+              <div class="usage-block--content-description">
+                <p>
+                  Offer your help with moving – whether it’s carrying, packing, or transporting. The
+                  app connects you directly with people who need your assistance.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="usage-block flex image-left">
-        <div class="usage-block--image">
-          <img src="./../assets/block2.webp" alt="" />
-        </div>
-        <div class="usage-block--content flex">
-          <div class="usage-block--content-title">
-            <h3>Einkäufe Erledigen lassen</h3>
-          </div>
-          <div class="usage-block--content-description">
-            <p>
-              UNeed groceries or other items urgently but don’t have time? Have a tasker do your
-              shopping and bring the goods directly to your door."
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="usage-block flex">
-        <div class="usage-block--image">
-          <img src="./../assets/block2.webp" alt="" />
-        </div>
-        <div class="usage-block--content flex">
-          <div class="usage-block--content-title">
-            <h3>Freiwillige Hilfe für die Nachbarschaft</h3>
-          </div>
-          <div class="usage-block--content-description">
-            <p>
-              Organize volunteer help for neighbors – such as cleaning out, shopping for seniors, or
-              supporting refugee initiatives."
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div v-if="selectedIndex == 1">
-      <div class="usage-block flex">
-        <div class="usage-block--image">
-          <img src="./../assets/block2.webp" alt="" />
-        </div>
-        <div class="usage-block--content flex">
-          <div class="usage-block--content-title">
-            <h3>Do Shopping for Others</h3>
-          </div>
-          <div class="usage-block--content-description">
-            <p>
-              Have time and enjoy shopping? Help your neighbors with their shopping and earn some
-              money.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="usage-block flex image-left">
-        <div class="usage-block--image">
-          <img src="./../assets/block2.webp" alt="" />
-        </div>
-        <div class="usage-block--content flex">
-          <div class="usage-block--content-title">
-            <h3>Tech Support for Seniors</h3>
-          </div>
-          <div class="usage-block--content-description">
-            <p>
-              Assist elderly people with their smartphones or setting up devices. Easy and direct
-              through the app.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="usage-block flex">
-        <div class="usage-block--image">
-          <img src="./../assets/block2.webp" alt="" />
-        </div>
-        <div class="usage-block--content flex">
-          <div class="usage-block--content-title">
-            <h3>Help with Moving</h3>
-          </div>
-          <div class="usage-block--content-description">
-            <p>
-              Offer your help with moving – whether it’s carrying, packing, or transporting. The app
-              connects you directly with people who need your assistance.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @use './../styles/variables' as variables;
+
 .usage {
   margin-bottom: 100px;
   border: 1px solid #e3e3e3;
   padding: 30px 0;
   transition: 2s ease;
   border-radius: 30px;
+
   &-info {
     max-width: 50%;
     margin: 0 auto;
     text-align: center;
     color: variables.$text-secondary;
-    &--title {
-      p {
-        text-transform: uppercase;
-        font-size: 0.8rem;
-        font-weight: 400;
-      }
-      margin-bottom: 1rem;
-    }
+
     &--description {
       h2 {
         font-weight: 500;
@@ -158,11 +159,13 @@ const selectedIndex = ref(0)
       }
       margin-bottom: 2.4rem;
     }
+
     &--menu {
       column-gap: 0.8rem;
       justify-content: center;
       align-items: center;
       margin-bottom: 64px;
+
       button {
         width: 30%;
         font-size: 1rem;
@@ -173,7 +176,6 @@ const selectedIndex = ref(0)
         border-radius: 15px;
         text-transform: capitalize;
         font-weight: 900;
-        // transition: 0.4s ease;
 
         &:hover {
           color: variables.$subcolor-light;
@@ -181,6 +183,7 @@ const selectedIndex = ref(0)
       }
     }
   }
+
   &-block {
     max-height: 550px;
     padding: 32px;
@@ -192,6 +195,7 @@ const selectedIndex = ref(0)
     &--image {
       max-width: 480px;
       height: 100%;
+
       img {
         height: 100%;
         border-radius: 30px;
@@ -199,16 +203,19 @@ const selectedIndex = ref(0)
         min-width: 500px;
       }
     }
+
     &--content {
       flex-direction: column;
       justify-content: center;
       row-gap: 0.8rem;
+
       &-title {
         h3 {
           font-size: 1.5rem;
           font-weight: 500;
         }
       }
+
       &-description {
         font-size: 1rem;
         font-weight: 400;
@@ -221,6 +228,19 @@ const selectedIndex = ref(0)
   flex-direction: row-reverse;
 }
 
+/* Fade transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-in-out;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.active {
+  color: variables.$subcolor-light !important;
+}
 @media (max-width: 940px) {
   .usage {
     &-block {
@@ -275,9 +295,5 @@ const selectedIndex = ref(0)
       }
     }
   }
-}
-
-.active {
-  color: variables.$subcolor-light !important;
 }
 </style>
