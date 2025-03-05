@@ -1,16 +1,12 @@
-<script lang="ts" setup>
+<script setup>
 import { ref } from 'vue'
+import { Splide, SplideSlide } from '@splidejs/vue-splide'
 
 const selectedIndex = ref(0)
 </script>
 
 <template>
-  <div
-    class="usage container"
-    v-motion
-    :initial="{ opacity: 0, y: 200 }"
-    :visibleOnce="{ opacity: 1, y: 0 }"
-  >
+  <div class="usage container">
     <div class="usage-info">
       <div class="usage-info-title">
         <p></p>
@@ -27,10 +23,19 @@ const selectedIndex = ref(0)
         </button>
       </div>
     </div>
-
-    <transition name="fade" mode="out-in">
-      <div :key="selectedIndex">
-        <div v-if="selectedIndex === 0">
+    <div v-if="selectedIndex == 0" class="">
+      <Splide
+        :options="{
+          type: 'loop',
+          perPage: 1,
+          gap: '1rem',
+          autoplay: true,
+          arrows: false,
+          speed: 500,
+          interval: 1500,
+        }"
+      >
+        <SplideSlide>
           <div class="usage-block flex">
             <div class="usage-block--image">
               <img src="./../assets/block2.webp" alt="" />
@@ -46,8 +51,10 @@ const selectedIndex = ref(0)
                 </p>
               </div>
             </div>
-          </div>
-          <div class="usage-block flex image-left">
+          </div></SplideSlide
+        >
+        <SplideSlide
+          ><div class="usage-block flex image-left">
             <div class="usage-block--image">
               <img src="./../assets/block2.webp" alt="" />
             </div>
@@ -57,13 +64,15 @@ const selectedIndex = ref(0)
               </div>
               <div class="usage-block--content-description">
                 <p>
-                  Need groceries or other items urgently but don’t have time? Have a tasker do your
-                  shopping and bring the goods directly to your door.
+                  UNeed groceries or other items urgently but don’t have time? Have a tasker do your
+                  shopping and bring the goods directly to your door."
                 </p>
               </div>
             </div>
-          </div>
-          <div class="usage-block flex">
+          </div></SplideSlide
+        >
+        <SplideSlide
+          ><div class="usage-block flex">
             <div class="usage-block--image">
               <img src="./../assets/block2.webp" alt="" />
             </div>
@@ -74,15 +83,28 @@ const selectedIndex = ref(0)
               <div class="usage-block--content-description">
                 <p>
                   Organize volunteer help for neighbors – such as cleaning out, shopping for
-                  seniors, or supporting refugee initiatives.
+                  seniors, or supporting refugee initiatives."
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div v-if="selectedIndex === 1">
-          <div class="usage-block flex">
+          </div></SplideSlide
+        >
+      </Splide>
+    </div>
+    <div v-if="selectedIndex == 1">
+      <Splide
+        :options="{
+          type: 'loop',
+          perPage: 1,
+          gap: '1rem',
+          autoplay: true,
+          arrows: false,
+          speed: 500,
+          interval: 1500,
+        }"
+      >
+        <SplideSlide
+          ><div class="usage-block flex">
             <div class="usage-block--image">
               <img src="./../assets/block2.webp" alt="" />
             </div>
@@ -98,7 +120,9 @@ const selectedIndex = ref(0)
               </div>
             </div>
           </div>
-          <div class="usage-block flex image-left">
+        </SplideSlide>
+        <SplideSlide
+          ><div class="usage-block flex image-left">
             <div class="usage-block--image">
               <img src="./../assets/block2.webp" alt="" />
             </div>
@@ -114,7 +138,9 @@ const selectedIndex = ref(0)
               </div>
             </div>
           </div>
-          <div class="usage-block flex">
+        </SplideSlide>
+        <SplideSlide
+          ><div class="usage-block flex">
             <div class="usage-block--image">
               <img src="./../assets/block2.webp" alt="" />
             </div>
@@ -130,28 +156,33 @@ const selectedIndex = ref(0)
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </transition>
+        </SplideSlide>
+      </Splide>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @use './../styles/variables' as variables;
-
+@import '@splidejs/splide/dist/css/splide.min.css';
 .usage {
   margin-bottom: 100px;
   border: 1px solid #e3e3e3;
   padding: 30px 0;
-  transition: 2s ease;
   border-radius: 30px;
-
   &-info {
     max-width: 50%;
     margin: 0 auto;
     text-align: center;
     color: variables.$text-secondary;
-
+    &--title {
+      p {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 400;
+      }
+      margin-bottom: 1rem;
+    }
     &--description {
       h2 {
         font-weight: 500;
@@ -159,13 +190,11 @@ const selectedIndex = ref(0)
       }
       margin-bottom: 2.4rem;
     }
-
     &--menu {
       column-gap: 0.8rem;
       justify-content: center;
       align-items: center;
       margin-bottom: 64px;
-
       button {
         width: 30%;
         font-size: 1rem;
@@ -176,6 +205,7 @@ const selectedIndex = ref(0)
         border-radius: 15px;
         text-transform: capitalize;
         font-weight: 900;
+        // transition: 0.4s ease;
 
         &:hover {
           color: variables.$subcolor-light;
@@ -195,7 +225,6 @@ const selectedIndex = ref(0)
     &--image {
       max-width: 480px;
       height: 100%;
-
       img {
         height: 100%;
         border-radius: 30px;
@@ -203,19 +232,16 @@ const selectedIndex = ref(0)
         min-width: 500px;
       }
     }
-
     &--content {
       flex-direction: column;
       justify-content: center;
       row-gap: 0.8rem;
-
       &-title {
         h3 {
           font-size: 1.5rem;
           font-weight: 500;
         }
       }
-
       &-description {
         font-size: 1rem;
         font-weight: 400;
@@ -228,19 +254,6 @@ const selectedIndex = ref(0)
   flex-direction: row-reverse;
 }
 
-/* Fade transition */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease-in-out;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.active {
-  color: variables.$subcolor-light !important;
-}
 @media (max-width: 940px) {
   .usage {
     &-block {
@@ -295,5 +308,9 @@ const selectedIndex = ref(0)
       }
     }
   }
+}
+
+.active {
+  color: variables.$subcolor-light !important;
 }
 </style>

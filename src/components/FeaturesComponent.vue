@@ -1,60 +1,11 @@
 <script lang="ts" setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 
 const selectedIndex = ref(0)
-const screenWidth = ref(window.innerWidth)
-
-const updateScreenWidth = () => {
-  screenWidth.value = window.innerWidth
-}
-
-onMounted(() => {
-  window.addEventListener('resize', updateScreenWidth)
-})
-onUnmounted(() => {
-  window.removeEventListener('resize', updateScreenWidth)
-})
-
-const motionProps = computed(() => {
-  if (screenWidth.value <= 470) {
-    return {
-      initial: { opacity: 0, y: 200 },
-      visibleOnce: { opacity: 1, y: 0 },
-    }
-  } else {
-    return {
-      initial: { opacity: 0, y: 400 },
-      visibleOnce: { opacity: 1, y: 0 },
-    }
-  }
-})
-
-const features = ref([
-  {
-    title: 'Peer-to-Peer Connections',
-    description: 'Directly connect with people who can help you—no middlemen.',
-  },
-  {
-    title: 'Real Reviews, More Trust',
-    description: 'Check real reviews from others and feel confident in your decision.',
-  },
-  {
-    title: 'Quick and Nearby',
-    description: 'Post your task and find the best match for help right in your area.',
-  },
-  {
-    title: 'Set Up in Seconds',
-    description: 'Register and get started in just 3 clicks, it is that easy.',
-  },
-  {
-    title: 'No Hidden Fees',
-    description: 'Use our platform for free - no subscriptions, no commissions.',
-  },
-])
 </script>
 
 <template>
-  <div class="features container" id="product" v-motion="motionProps">
+  <div class="features container" id="product">
     <div class="features-info">
       <div class="features-info--title">
         <p></p>
@@ -71,35 +22,86 @@ const features = ref([
       </div>
     </div>
 
-    <transition name="fade" mode="out-in">
-      <div class="features-block flex" :key="selectedIndex">
-        <div class="features-block--image">
-          <img src="./../assets/block.webp" alt="" />
+    <div class="features-block flex" v-if="selectedIndex === 0">
+      <!-- <div class="features-block--image">
+        <img src="./../assets/block.webp" alt="" />
+      </div> -->
+      <div class="features-block--content flex">
+        <div class="features-block--content-title">
+          <h3>Peer-to-Peer Connections</h3>
         </div>
-        <div class="features-block--content flex">
-          <div class="features-block--content-title">
-            <h3>{{ features[selectedIndex].title }}</h3>
-          </div>
-          <div class="features-block--content-description">
-            <p>{{ features[selectedIndex].description }}</p>
-          </div>
+        <div class="features-block--content-description">
+          <p>Directly connect with people who can help you—no middlemen.</p>
         </div>
       </div>
-    </transition>
+    </div>
+
+    <div class="features-block flex" v-if="selectedIndex === 1">
+      <!-- <div class="features-block--image">
+        <img src="./../assets/block.webp" alt="" />
+      </div> -->
+      <div class="features-block--content flex">
+        <div class="features-block--content-title">
+          <h3>Real Reviews, More Trust</h3>
+        </div>
+        <div class="features-block--content-description">
+          <p>Check real reviews from others and feel confident in your decision.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-block flex" v-if="selectedIndex === 2">
+      <!-- <div class="features-block--image">
+        <img src="./../assets/block.webp" alt="" />
+      </div> -->
+      <div class="features-block--content flex">
+        <div class="features-block--content-title">
+          <h3>Quick and Nearby</h3>
+        </div>
+        <div class="features-block--content-description">
+          <p>Post your task and find the best match for help right in your area.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-block flex" v-if="selectedIndex === 3">
+      <!-- <div class="features-block--image">
+        <img src="./../assets/block.webp" alt="" />
+      </div> -->
+      <div class="features-block--content flex">
+        <div class="features-block--content-title">
+          <h3>Set Up in Seconds</h3>
+        </div>
+        <div class="features-block--content-description">
+          <p>Register and get started in just 3 clicks, it is that easy.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-block flex" v-if="selectedIndex === 4">
+      <!-- <div class="features-block--image">
+        <img src="./../assets/block.webp" alt="" />
+      </div> -->
+      <div class="features-block--content flex">
+        <div class="features-block--content-title">
+          <h3>No Hidden Fees</h3>
+        </div>
+        <div class="features-block--content-description">
+          <p>Use our platform for free - no subscriptions, no commissions.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 @use './../styles/variables' as variables;
-
 .features {
-  margin-top: 100px;
+  margin-top: 50px;
   margin-bottom: 100px;
   background-color: variables.$text-invert;
   border-radius: 30px;
   padding: 32px;
-  transition: 2s ease;
-
   &-info {
     max-width: 50%;
     margin: 0 auto;
@@ -114,7 +116,6 @@ const features = ref([
       }
       margin-bottom: 1rem;
     }
-
     &--description {
       h2 {
         font-weight: 500;
@@ -122,13 +123,11 @@ const features = ref([
       }
       margin-bottom: 2.4rem;
     }
-
     &--menu {
       column-gap: 0.8rem;
       justify-content: center;
       align-items: center;
       margin-bottom: 64px;
-
       button {
         min-width: 100px;
         width: 100%;
@@ -146,38 +145,35 @@ const features = ref([
       }
     }
   }
-
   &-block {
     max-height: 550px;
     column-gap: 2.4rem;
-
+    justify-content: center;
+    text-align: center;
     &--image {
       max-width: 480px;
       height: 100%;
-
       img {
         height: 100%;
         border-radius: 30px;
         width: 100%;
       }
     }
-
     &--content {
       flex-direction: column;
       justify-content: center;
       row-gap: 0.8rem;
       color: variables.$text-secondary;
-
       &-title {
         h3 {
-          font-size: 2.25rem;
+          font-size: 3rem;
           font-weight: 500;
         }
       }
-
       &-description {
-        font-size: 1rem;
+        font-size: 2rem;
         font-weight: 200;
+        min-height: 100px;
       }
     }
   }
@@ -228,15 +224,5 @@ const features = ref([
 
 .active {
   color: variables.$subcolor-light !important;
-}
-
-/* Fade transition */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease-in-out;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

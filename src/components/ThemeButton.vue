@@ -19,7 +19,7 @@ button {
   align-items: center;
   column-gap: 12px;
   padding: 1rem 2rem;
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   border: 1px solid variables.$primary-grey;
   border-radius: 50px;
   color: variables.$primary-white;

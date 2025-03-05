@@ -20,6 +20,7 @@ const toggleHamburgeMenu = () => {
   hamburgerMenuStatus.value = !hamburgerMenuStatus.value
 }
 
+// Function to handle smooth scrolling
 const scrollToSection = (target: string) => {
   setTimeout(() => {
     const element = document.querySelector(target)
@@ -88,7 +89,7 @@ onUnmounted(() => {
 @use './../styles/variables' as variables;
 header {
   border-bottom: 1px solid variables.$primary-grey;
-  z-index: 999;
+  z-index: 9999;
   padding: 10px 0 10px 0;
   position: sticky;
   top: 0;
@@ -125,29 +126,15 @@ header {
 }
 
 .hamburger-menu {
-  position: absolute;
-  width: 100%;
-  background-color: variables.$theme-color;
-  overflow: hidden;
-  max-height: 300px; // Set an appropriate max-height
-  opacity: 0;
-  transform: scaleY(0);
-  transform-origin: top;
-  transition:
-    transform 0.4s ease-in-out,
-    opacity 0.3s ease-in-out;
-
+  position: relative;
   nav {
     flex-direction: column;
     align-items: center;
-
     a {
       padding: 32px 0px;
       border-bottom: 1px solid variables.$primary-grey;
       text-align: center;
       text-transform: capitalize;
-      color: variables.$primary-black;
-
       &:last-child {
         border: none;
       }
@@ -156,13 +143,11 @@ header {
 }
 
 .show-menu {
-  opacity: 1;
-  transform: scaleY(1);
+  animation: show-menu-animation 0.5s forwards;
 }
 
 .hide-menu {
-  opacity: 0;
-  transform: scaleY(0);
+  animation: hide-menu-animation 0.5s forwards;
 }
 
 @keyframes show-menu-animation {

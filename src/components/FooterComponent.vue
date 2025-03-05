@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import LinkedinIcon from './Icons/LinkedinIcon.vue'
-import InstagramIcon from './Icons/InstagramIcon.vue'
 const menuData = [
   { href: '#product', name: 'product' },
   { href: '#about', name: 'about' },
@@ -25,8 +23,7 @@ const menuData = [
           <div class="footer-content--info-links-social menu-column">
             <h2>Follow Us</h2>
             <nav>
-              <a href="/"><InstagramIcon /></a>
-              <a href="/"><LinkedinIcon /></a>
+              <a :href="menu.href" v-for="menu in menuData" :class="['row']">{{ menu.name }}</a>
             </nav>
           </div>
         </div>
@@ -68,19 +65,6 @@ footer {
       }
       &-links {
         column-gap: 40px;
-        &-social {
-          nav {
-            flex-direction: row;
-            column-gap: 10px;
-            a {
-              svg {
-                height: 30px;
-                width: 30px;
-                fill: variables.$subcolor-dark;
-              }
-            }
-          }
-        }
       }
     }
     &--copyright {

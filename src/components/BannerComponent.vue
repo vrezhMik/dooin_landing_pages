@@ -8,11 +8,11 @@ import ThemeButton from './ThemeButton.vue'
       <h1 class="banner-title green">Find Help or Offer Yours</h1>
     </div>
     <div class="row banner-description">
-      <p>Earn Money, Exchange Benefits, or Volunteer – There’s Something for Everyone!</p>
+      <p>Earn Money, Exchange Benefits, or Volunteer</p>
     </div>
     <div class="row flex banner-buttons">
       <h3>Are You In?</h3>
-      <ThemeButton name="Get started" />
+      <ThemeButton name="Register Now" />
     </div>
     <div class="flex banner-image--container">
       <img src="./../assets/phone.png" alt="" />
@@ -29,7 +29,6 @@ import ThemeButton from './ThemeButton.vue'
   background: -webkit-linear-gradient(270deg, hsla(226, 63%, 95%, 1) 0%, #fafafa 100%);
   padding: 76px 76px 32px 76px;
   border-radius: 30px;
-
   &-title {
     text-align: center;
     font-size: 3.8rem;
@@ -42,9 +41,12 @@ import ThemeButton from './ThemeButton.vue'
     width: 70%;
     margin: 0 auto;
     margin-bottom: 32px;
+    font-size: 1.4Getrem;
   }
   &-buttons {
     justify-content: center;
+    row-gap: 15px;
+    flex-direction: column;
     align-items: center;
     column-gap: 12px;
     margin-bottom: 40px;
