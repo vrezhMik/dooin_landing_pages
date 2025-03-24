@@ -166,7 +166,7 @@ const selectedIndex = ref(0)
 @use './../styles/variables' as variables;
 @import '@splidejs/splide/dist/css/splide.min.css';
 .usage {
-  margin-bottom: 100px;
+  // margin-bottom: 100px;
   border: 1px solid #e3e3e3;
   padding: 30px 0;
   border-radius: 30px;

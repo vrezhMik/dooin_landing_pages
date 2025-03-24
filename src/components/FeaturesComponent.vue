@@ -97,8 +97,8 @@ const selectedIndex = ref(0)
 <style scoped lang="scss">
 @use './../styles/variables' as variables;
 .features {
-  margin-top: 50px;
-  margin-bottom: 100px;
+  // margin-top: 50px;
+  // margin-bottom: 100px;
   background-color: variables.$text-invert;
   border-radius: 30px;
   padding: 32px;

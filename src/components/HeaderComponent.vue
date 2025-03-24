@@ -20,7 +20,6 @@ const toggleHamburgeMenu = () => {
   hamburgerMenuStatus.value = !hamburgerMenuStatus.value
 }
 
-// Function to handle smooth scrolling
 const scrollToSection = (target: string) => {
   setTimeout(() => {
     const element = document.querySelector(target)
@@ -29,6 +28,7 @@ const scrollToSection = (target: string) => {
     } else {
       console.warn(`Element ${target} not found on the page.`)
     }
+    hamburgerMenuStatus.value = false
   }, 100)
 }
 
@@ -43,7 +43,7 @@ onUnmounted(() => {
 
 <template>
   <header :class="['sora']">
-    <div :class="['row', 'flex']">
+    <div :class="['row', 'flex', 'container']">
       <nav :class="['header-menu', 'flex']">
         <a href="#" @click.prevent="scrollToSection('#home')"><span class="green">D</span>ooin</a>
         <a
@@ -95,7 +95,7 @@ header {
   top: 0;
   background-color: variables.$theme-color;
   div {
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     column-gap: 30%;
     .header-menu {

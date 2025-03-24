@@ -22,14 +22,14 @@
 @use './../styles/variables' as variables;
 
 .about {
-  background-color: variables.$subcolor-dark;
+  background-color: variables.$primary-color;
   padding: 80px 0;
-  margin-bottom: 80px;
+  // margin-bottom: 80px;
   &-info {
     max-width: 50%;
     margin: 0 auto;
     text-align: center;
-    color: variables.$background-invert;
+    color: variables.$text-invert;
     margin-bottom: 30px;
     &--title {
       p {
@@ -49,7 +49,7 @@
   &-story {
     p {
       margin: 0 auto;
-      color: variables.$background-invert;
+      color: variables.$text-invert;
       font-size: 1.2rem;
       width: 50%;
       text-align: center;

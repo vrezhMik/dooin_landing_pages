@@ -27,7 +27,7 @@
 @use './../styles/variables' as variables;
 
 .installation {
-  background-color: variables.$background-invert;
+  background-color: variables.$primary-color;
   padding: 80px 0;
   &-info {
     max-width: 50%;

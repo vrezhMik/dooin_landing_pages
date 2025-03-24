@@ -66,19 +66,19 @@ onMounted(() => {
     </section>
 
     <!-- Sections appear one by one on scroll -->
-    <section ref="featuresRef" :class="{ show: isVisible.features }" style="min-height: 70vh">
+    <section ref="featuresRef" :class="{ show: isVisible.features }" style="/*min-height: 70vh*/">
       <FeaturesComponent v-if="isVisible.features" />
     </section>
 
-    <section ref="aboutRef" :class="{ show: isVisible.about }" style="min-height: 70vh">
+    <section ref="aboutRef" :class="{ show: isVisible.about }" style="/*/*min-height: 70vh*/*/">
       <AboutComponent v-if="isVisible.about" />
     </section>
 
-    <section ref="usageRef" :class="{ show: isVisible.usage }" style="min-height: 70vh">
+    <section ref="usageRef" :class="{ show: isVisible.usage }" style="/*min-height: 70vh*/">
       <UsageComponent v-if="isVisible.usage" />
     </section>
 
-    <section ref="faqRef" :class="{ show: isVisible.faq }" style="min-height: 70vh">
+    <section ref="faqRef" :class="{ show: isVisible.faq }" style="/*min-height: 70vh*/">
       <FAQComponent v-if="isVisible.faq" />
     </section>
 
@@ -99,11 +99,15 @@ main {
 
 // Initially hidden sections
 section {
+  margin-bottom: 100px;
   opacity: 0;
   transform: translateY(50px);
   transition:
     opacity 0.8s ease-out,
     transform 0.8s ease-out;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 // Only the currently visible section gets the 'show' class
