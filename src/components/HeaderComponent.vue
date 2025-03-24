@@ -1,42 +1,61 @@
 <script lang="ts" setup>
 import Button from './ButtonComponent.vue'
 import HamburgerIcon from './Icons/HamburgerIcon.vue'
-import { ref, onMounted, onUnmounted } from 'vue'
 import VueScrollTo from 'vue-scrollto'
+import { ref, onMounted, onUnmounted } from 'vue'
 
+// Menu data
 const menuData = [
-  { href: '#product', name: 'product' },
-  { href: '#about', name: 'about' },
+  { href: '#product', name: 'Product' },
+  { href: '#about', name: 'About' },
 ]
 
+// State variables
 const isMobile = ref(window.innerWidth < 1000)
 const hamburgerMenuStatus = ref(false)
+const isVisible = ref(false)
 
+// Update width handler
 const updateWidth = () => {
   isMobile.value = window.innerWidth < 1000
 }
 
+// Toggle menu visibility
 const toggleHamburgeMenu = () => {
   hamburgerMenuStatus.value = !hamburgerMenuStatus.value
 }
 
+// Scroll to section smoothly
 const scrollToSection = (target: string) => {
   setTimeout(() => {
     const element = document.querySelector(target)
     const offset = window.innerWidth > 768 ? -80 : -230
+
     if (element) {
       VueScrollTo.scrollTo(target, 1000, { easing: 'ease-in-out', offset: offset })
     } else {
       console.warn(`Element ${target} not found on the page.`)
     }
+
     hamburgerMenuStatus.value = false
   }, 100)
 }
 
+// Transition handlers
+const onBeforeEnter = () => {
+  isVisible.value = true
+}
+
+const onBeforeLeave = () => {
+  isVisible.value = false
+}
+
+// Add event listeners
 onMounted(() => {
   window.addEventListener('resize', updateWidth)
 })
 
+// Remove event listeners
 onUnmounted(() => {
   window.removeEventListener('resize', updateWidth)
 })
@@ -62,27 +81,7 @@ onUnmounted(() => {
         <HamburgerIcon />
       </button>
     </div>
-    <!-- <div
-      :class="{
-        row: true,
-        'hamburger-menu': true,
-        'show-menu': hamburgerMenuStatus,
-        'hide-menu': !hamburgerMenuStatus,
-      }"
-      v-if="isMobile"
-    >
-      <nav :class="['flex']">
-        <a
-          v-for="menu in menuData"
-          :key="menu.name"
-          href="#"
-          @click.prevent="scrollToSection(menu.href)"
-          :class="['row']"
-        >
-          {{ menu.name }}
-        </a>
-      </nav>
-    </div> -->
+
     <transition name="menu-fade" @before-enter="onBeforeEnter" @before-leave="onBeforeLeave">
       <div
         v-show="hamburgerMenuStatus || isVisible"
