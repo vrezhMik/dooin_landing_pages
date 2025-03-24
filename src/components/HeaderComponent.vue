@@ -23,8 +23,9 @@ const toggleHamburgeMenu = () => {
 const scrollToSection = (target: string) => {
   setTimeout(() => {
     const element = document.querySelector(target)
+    const offset = window.innerWidth > 768 ? -80 : -230
     if (element) {
-      VueScrollTo.scrollTo(target, 1000, { easing: 'ease-in-out', offset: -80 })
+      VueScrollTo.scrollTo(target, 1000, { easing: 'ease-in-out', offset: offset })
     } else {
       console.warn(`Element ${target} not found on the page.`)
     }
@@ -61,7 +62,7 @@ onUnmounted(() => {
         <HamburgerIcon />
       </button>
     </div>
-    <div
+    <!-- <div
       :class="{
         row: true,
         'hamburger-menu': true,
@@ -81,7 +82,26 @@ onUnmounted(() => {
           {{ menu.name }}
         </a>
       </nav>
-    </div>
+    </div> -->
+    <transition name="menu-fade" @before-enter="onBeforeEnter" @before-leave="onBeforeLeave">
+      <div
+        v-show="hamburgerMenuStatus || isVisible"
+        v-if="isMobile"
+        :class="['row', 'hamburger-menu']"
+      >
+        <nav class="flex">
+          <a
+            v-for="menu in menuData"
+            :key="menu.name"
+            href="#"
+            @click.prevent="scrollToSection(menu.href)"
+            class="row"
+          >
+            {{ menu.name }}
+          </a>
+        </nav>
+      </div>
+    </transition>
   </header>
 </template>
 
@@ -135,6 +155,7 @@ header {
       border-bottom: 1px solid variables.$primary-grey;
       text-align: center;
       text-transform: capitalize;
+      color: variables.$primary-color;
       &:last-child {
         border: none;
       }

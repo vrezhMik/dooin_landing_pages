@@ -8,9 +8,8 @@ import AboutComponent from './AboutComponent.vue'
 import FAQComponent from './FAQComponent.vue'
 import InstallationComponent from './InstallationComponent.vue'
 
-// Visibility state (BannerComponent is always visible)
 const isVisible = ref({
-  banner: true, // Always visible
+  banner: true,
   features: false,
   about: false,
   usage: false,
@@ -18,15 +17,17 @@ const isVisible = ref({
   installation: false,
 })
 
-// Section refs
 const featuresRef = ref<HTMLElement | null>(null)
 const aboutRef = ref<HTMLElement | null>(null)
 const usageRef = ref<HTMLElement | null>(null)
 const faqRef = ref<HTMLElement | null>(null)
 const installationRef = ref<HTMLElement | null>(null)
 
-// Observe sections on mount
+function getThreshold() {
+  return window.innerWidth > 768 ? 1.0 : 0.1
+}
 onMounted(() => {
+  const threshold = getThreshold()
   const sections = [
     { ref: featuresRef, key: 'features' },
     { ref: aboutRef, key: 'about' },
@@ -37,22 +38,20 @@ onMounted(() => {
 
   sections.forEach(({ ref, key }) => {
     if (ref.value) {
-      console.log(`Observing section: ${key}`) // Debug log
       useIntersectionObserver(
         ref,
         ([{ isIntersecting }]) => {
-          console.log(`${key} is intersecting: ${isIntersecting}`) // Debug log
           if (isIntersecting) {
             isVisible.value = { ...isVisible.value, [key]: true }
           }
         },
         {
-          threshold: 0.1, // Lower threshold
-          rootMargin: '0px 0px -10% 0px', // Smaller buffer zone
+          threshold: key === 'installation' ? 0.01 : threshold,
+          rootMargin: key === 'installation' ? '0px 0px 300px 0px' : '0px 0px 0px 0px',
         },
       )
     } else {
-      console.error(`Ref for ${key} is null`) // Debug log
+      console.error(`Ref for ${key} is null`)
     }
   })
 })
@@ -60,32 +59,30 @@ onMounted(() => {
 
 <template>
   <main class="sora" id="home">
-    <!-- BannerComponent is always visible -->
-    <section class="show">
+    <section class="show" style="min-height: 70vh">
       <BannerComponent />
     </section>
 
-    <!-- Sections appear one by one on scroll -->
-    <section ref="featuresRef" :class="{ show: isVisible.features }" style="/*min-height: 70vh*/">
+    <section ref="featuresRef" :class="{ show: isVisible.features }" style="min-height: 200px">
       <FeaturesComponent v-if="isVisible.features" />
     </section>
 
-    <section ref="aboutRef" :class="{ show: isVisible.about }" style="/*/*min-height: 70vh*/*/">
+    <section ref="aboutRef" :class="{ show: isVisible.about }" style="min-height: 200px">
       <AboutComponent v-if="isVisible.about" />
     </section>
 
-    <section ref="usageRef" :class="{ show: isVisible.usage }" style="/*min-height: 70vh*/">
+    <section ref="usageRef" :class="{ show: isVisible.usage }" style="min-height: 200px">
       <UsageComponent v-if="isVisible.usage" />
     </section>
 
-    <section ref="faqRef" :class="{ show: isVisible.faq }" style="/*min-height: 70vh*/">
+    <section ref="faqRef" :class="{ show: isVisible.faq }" style="min-height: 200px">
       <FAQComponent v-if="isVisible.faq" />
     </section>
 
     <section
       ref="installationRef"
       :class="{ show: isVisible.installation }"
-      style="min-height: 70vh"
+      style="min-height: auto"
     >
       <InstallationComponent v-if="isVisible.installation" />
     </section>
@@ -97,7 +94,6 @@ main {
   margin-top: 50px;
 }
 
-// Initially hidden sections
 section {
   margin-bottom: 100px;
   opacity: 0;
@@ -110,7 +106,6 @@ section {
   }
 }
 
-// Only the currently visible section gets the 'show' class
 section.show {
   opacity: 1;
   transform: translateY(0);

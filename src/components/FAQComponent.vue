@@ -8,7 +8,6 @@ let openBox = ref<number>(-1)
 const toggleAnswer = (index: number) => {
   openIndexes.value[index] = !openIndexes.value[index]
   openBox.value = openBox.value != index ? index : -1
-  console.log(openBox.value)
 }
 </script>
 
