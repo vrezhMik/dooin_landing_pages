@@ -4,14 +4,13 @@ import HamburgerIcon from './Icons/HamburgerIcon.vue'
 import VueScrollTo from 'vue-scrollto'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useLanguageStore } from '@/stores/store'
+import { computed } from 'vue'
 
 const languageStore = useLanguageStore()
+
+const isEnglish = computed(() => languageStore.language === 'eng')
 const chnageLanguage = (lang: 'eng' | 'de') => {
   languageStore.setLanguage(lang)
-}
-
-const isEnglish = (): boolean => {
-  return languageStore.language === 'eng'
 }
 
 const menuData = [
@@ -80,16 +79,16 @@ onUnmounted(() => {
           @click.prevent="scrollToSection(menu.href)"
           v-if="!isMobile"
         >
-          {{ isEnglish() ? menu.name_eng : menu.name_de }}
+          {{ isEnglish ? menu.name_eng : menu.name_de }}
         </a>
       </nav>
       <div class="header-controll flex">
         <div class="header-lang-menu flex">
           <button @click="chnageLanguage('eng')">eng</button>
-          <button @click="chnageLanguage('ge')">ge</button>
+          <button @click="chnageLanguage('de')">ge</button>
         </div>
         <Button
-          :name="isEnglish() ? button_title.title_eng : button_title.title_de"
+          :name="isEnglish ? button_title.title_eng : button_title.title_de"
           v-if="!isMobile"
         />
         <button v-if="isMobile" :class="['hamburger-button']" @click="toggleHamburgeMenu">
@@ -107,12 +106,12 @@ onUnmounted(() => {
         <nav class="flex">
           <a
             v-for="menu in menuData"
-            :key="menu.name"
+            :key="menu.name_eng"
             href="#"
             @click.prevent="scrollToSection(menu.href)"
             class="row"
           >
-            {{ menu.name }}
+            {{ isEnglish ? menu.name_eng : menu.name_de }}
           </a>
         </nav>
       </div>

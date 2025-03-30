@@ -2,7 +2,7 @@
 
 <template>
   <svg
-    fill="#000000"
+    fill="#ffffff"
     width="800px"
     height="800px"
     viewBox="-5.5 0 32 32"
