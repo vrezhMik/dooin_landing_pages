@@ -1,93 +1,98 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useLanguageStore } from '@/stores/store'
+import { computed } from 'vue'
+
+const languageStore = useLanguageStore()
+
+const isEnglish = computed(() => languageStore.language === 'eng')
 
 const selectedIndex = ref(0)
+const content = {
+  title: {
+    name_eng: 'What Makes Dooin Special',
+    name_de: 'Was macht Dooin besonders?',
+  },
+  buttons: [
+    { button_eng: 'Direct', button_de: 'Direkt' },
+    { button_eng: 'Trusted', button_de: 'Vertrauenswürdig' },
+    { button_eng: 'Nearby', button_de: 'In der Nähe' },
+    { button_eng: 'Fast', button_de: 'Schnell' },
+    { button_eng: 'Free', button_de: 'Kostenlos' },
+  ],
+  data: [
+    {
+      title_eng: 'Peer-to-Peer Connections',
+      title_de: 'Direkte Vernetzung',
+      content_eng: 'Directly connect with people who can help you—no middlemen.',
+      content_de:
+        'Erhalte direkte Unterstützung von den passenden Fachkräften – ohne Dritte dazwischen.',
+    },
+    {
+      title_eng: 'Real Reviews, More Trust',
+      title_de: 'Echte Bewertunden, mehr Vertrauen',
+      content_eng: 'Check real reviews from others and feel confident in your decision.',
+      content_de: 'Vertrau auf echte Bewertunden und entscheide mit Sicherheit.',
+    },
+    {
+      title_eng: 'Quick and Nearby',
+      title_de: 'Schnell und in deiner Nähe',
+      content_eng: 'Post your task and find the best match for help right in your area.',
+      content_de: 'Poste deine Aufgabe und entdecke den besten Helfer in deiner Region.',
+    },
+    {
+      title_eng: 'Set Up in Seconds',
+      title_de: 'In Sekunden startklar',
+      content_eng: 'Register and det started in just 3 clicks, it is that easy.',
+      content_de: 'Registriere dich und leg in nur 3 Klicks los – so einfach ist das.',
+    },
+    {
+      title_eng: 'No Hidden Fees',
+      title_de: 'Keine versteckten debühren',
+      content_eng: 'Use our platform for free - no subscriptions, no commissions.',
+      content_de: 'Nutze unsere Plattform kostenlos – keine Abos, keine Provisionen.',
+    },
+  ],
+}
 </script>
 
 <template>
   <div class="features container" id="product">
     <div class="features-info">
-      <div class="features-info--title">
-        <p></p>
-      </div>
       <div class="features-info--description">
-        <h2>What Makes Dooin Special</h2>
+        <h2>{{ isEnglish ? content.title.name_eng : content.title.name_de }}</h2>
       </div>
       <div class="features-info--menu flex">
-        <button @click="selectedIndex = 0" :class="{ active: selectedIndex === 0 }">Direct</button>
-        <button @click="selectedIndex = 1" :class="{ active: selectedIndex === 1 }">Trusted</button>
-        <button @click="selectedIndex = 2" :class="{ active: selectedIndex === 2 }">Nearby</button>
-        <button @click="selectedIndex = 3" :class="{ active: selectedIndex === 3 }">Fast</button>
-        <button @click="selectedIndex = 4" :class="{ active: selectedIndex === 4 }">Free</button>
+        <button
+          v-for="(button, key) in content.buttons"
+          :key="key"
+          @click="selectedIndex = key"
+          :class="{ active: selectedIndex === key }"
+        >
+          {{ isEnglish ? button.button_eng : button.button_de }}
+        </button>
       </div>
     </div>
 
-    <div class="features-block flex" v-if="selectedIndex === 0">
-      <!-- <div class="features-block--image">
-        <img src="./../assets/block.webp" alt="" />
-      </div> -->
+    <div class="features-block flex" v-if="content.data[selectedIndex]" :key="selectedIndex">
       <div class="features-block--content flex">
         <div class="features-block--content-title">
-          <h3>Peer-to-Peer Connections</h3>
+          <h3>
+            {{
+              isEnglish
+                ? content.data[selectedIndex].title_eng
+                : content.data[selectedIndex].title_de
+            }}
+          </h3>
         </div>
         <div class="features-block--content-description">
-          <p>Directly connect with people who can help you—no middlemen.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="features-block flex" v-if="selectedIndex === 1">
-      <!-- <div class="features-block--image">
-        <img src="./../assets/block.webp" alt="" />
-      </div> -->
-      <div class="features-block--content flex">
-        <div class="features-block--content-title">
-          <h3>Real Reviews, More Trust</h3>
-        </div>
-        <div class="features-block--content-description">
-          <p>Check real reviews from others and feel confident in your decision.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="features-block flex" v-if="selectedIndex === 2">
-      <!-- <div class="features-block--image">
-        <img src="./../assets/block.webp" alt="" />
-      </div> -->
-      <div class="features-block--content flex">
-        <div class="features-block--content-title">
-          <h3>Quick and Nearby</h3>
-        </div>
-        <div class="features-block--content-description">
-          <p>Post your task and find the best match for help right in your area.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="features-block flex" v-if="selectedIndex === 3">
-      <!-- <div class="features-block--image">
-        <img src="./../assets/block.webp" alt="" />
-      </div> -->
-      <div class="features-block--content flex">
-        <div class="features-block--content-title">
-          <h3>Set Up in Seconds</h3>
-        </div>
-        <div class="features-block--content-description">
-          <p>Register and get started in just 3 clicks, it is that easy.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="features-block flex" v-if="selectedIndex === 4">
-      <!-- <div class="features-block--image">
-        <img src="./../assets/block.webp" alt="" />
-      </div> -->
-      <div class="features-block--content flex">
-        <div class="features-block--content-title">
-          <h3>No Hidden Fees</h3>
-        </div>
-        <div class="features-block--content-description">
-          <p>Use our platform for free - no subscriptions, no commissions.</p>
+          <p>
+            {{
+              isEnglish
+                ? content.data[selectedIndex].content_eng
+                : content.data[selectedIndex].content_de
+            }}
+          </p>
         </div>
       </div>
     </div>
@@ -150,7 +155,7 @@ const selectedIndex = ref(0)
     column-gap: 2.4rem;
     justify-content: center;
     text-align: center;
-    &--image {
+    &--imade {
       max-width: 480px;
       height: 100%;
       img {
@@ -200,7 +205,7 @@ const selectedIndex = ref(0)
       height: 250px;
       align-items: center;
       column-gap: 1rem;
-      &--image {
+      &--imade {
         width: 50%;
         height: 50%;
         img {

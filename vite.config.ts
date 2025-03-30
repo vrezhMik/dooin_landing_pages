@@ -5,7 +5,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
-  base: '/dooin_landing_pages/', // Ensure this exactly matches your GitHub repo name!
+  base: '/static/landing_page/', // This tells Vite to prefix all assets with this URL
   plugins: [vue(), vueJsx(), vueDevTools()],
   resolve: {
     alias: {
@@ -13,6 +13,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'dist',
+    outDir: 'static/landing_page', // Ensure build files are placed here
+    emptyOutDir: true, // Clears previous builds before generating new ones
   },
 })

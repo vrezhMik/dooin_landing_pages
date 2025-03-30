@@ -3,29 +3,39 @@ import Button from './ButtonComponent.vue'
 import HamburgerIcon from './Icons/HamburgerIcon.vue'
 import VueScrollTo from 'vue-scrollto'
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useLanguageStore } from '@/stores/store'
 
-// Menu data
+const languageStore = useLanguageStore()
+const chnageLanguage = (lang: 'eng' | 'de') => {
+  languageStore.setLanguage(lang)
+}
+
+const isEnglish = (): boolean => {
+  return languageStore.language === 'eng'
+}
+
 const menuData = [
-  { href: '#product', name: 'Product' },
-  { href: '#about', name: 'About' },
+  { href: '#product', name_eng: 'Product', name_de: 'Produkt' },
+  { href: '#about', name_eng: 'About', name_de: 'Über uns' },
 ]
 
-// State variables
+const button_title = {
+  title_eng: 'Get Started',
+  title_de: 'Beginnen',
+}
+
 const isMobile = ref(window.innerWidth < 1000)
 const hamburgerMenuStatus = ref(false)
 const isVisible = ref(false)
 
-// Update width handler
 const updateWidth = () => {
   isMobile.value = window.innerWidth < 1000
 }
 
-// Toggle menu visibility
 const toggleHamburgeMenu = () => {
   hamburgerMenuStatus.value = !hamburgerMenuStatus.value
 }
 
-// Scroll to section smoothly
 const scrollToSection = (target: string) => {
   setTimeout(() => {
     const element = document.querySelector(target)
@@ -41,7 +51,6 @@ const scrollToSection = (target: string) => {
   }, 100)
 }
 
-// Transition handlers
 const onBeforeEnter = () => {
   isVisible.value = true
 }
@@ -50,12 +59,10 @@ const onBeforeLeave = () => {
   isVisible.value = false
 }
 
-// Add event listeners
 onMounted(() => {
   window.addEventListener('resize', updateWidth)
 })
 
-// Remove event listeners
 onUnmounted(() => {
   window.removeEventListener('resize', updateWidth)
 })
@@ -68,18 +75,27 @@ onUnmounted(() => {
         <a href="#" @click.prevent="scrollToSection('#home')"><span class="green">D</span>ooin</a>
         <a
           v-for="menu in menuData"
-          :key="menu.name"
+          :key="menu.name_eng"
           href="#"
           @click.prevent="scrollToSection(menu.href)"
           v-if="!isMobile"
         >
-          {{ menu.name }}
+          {{ isEnglish() ? menu.name_eng : menu.name_de }}
         </a>
       </nav>
-      <Button name="Get started" v-if="!isMobile"></Button>
-      <button v-if="isMobile" :class="['hamburger-button']" @click="toggleHamburgeMenu">
-        <HamburgerIcon />
-      </button>
+      <div class="header-controll flex">
+        <div class="header-lang-menu flex">
+          <button @click="chnageLanguage('eng')">eng</button>
+          <button @click="chnageLanguage('ge')">ge</button>
+        </div>
+        <Button
+          :name="isEnglish() ? button_title.title_eng : button_title.title_de"
+          v-if="!isMobile"
+        />
+        <button v-if="isMobile" :class="['hamburger-button']" @click="toggleHamburgeMenu">
+          <HamburgerIcon />
+        </button>
+      </div>
     </div>
 
     <transition name="menu-fade" @before-enter="onBeforeEnter" @before-leave="onBeforeLeave">

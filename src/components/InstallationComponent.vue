@@ -1,23 +1,46 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useLanguageStore } from '@/stores/store'
+import { computed } from 'vue'
+
+const languageStore = useLanguageStore()
+
+const isEnglish = computed(() => languageStore.language === 'eng')
+
+const content = {
+  title: {
+    title_eng: 'How it works – Just 3 clicks!',
+    title_de: 'Wie es funktioniert – Nur 3 Klicks!  ',
+  },
+  steps: [
+    {
+      number: '1',
+      content_eng: 'Sign up in seconds.',
+      content_de: 'Registriere dich in wenigen Sekunden.',
+    },
+    {
+      number: '2',
+      content_eng: 'Create or find a task that suits you.',
+      content_de: 'Erstelle oder finde eine Aufgabe, die zu Dir passt.',
+    },
+    {
+      number: '3',
+      content_eng: 'Connect with the right person – done!',
+      content_de: 'Verbinde dich mit der richtigen Person – fertig!',
+    },
+  ],
+}
+</script>
 <template>
   <div class="installation">
     <div class="installation-info">
       <div class="installation-info--description">
-        <h2>Wie es funktioniert – Nur 3 Klicks!</h2>
+        <h2>{{ isEnglish ? content.title.title_eng : content.title.title_de }}</h2>
       </div>
     </div>
     <div class="installation-steps">
-      <div class="installation-steps--block">
-        <span>1</span>
-        <h2>Sign up in seconds.</h2>
-      </div>
-      <div class="installation-steps--block">
-        <span>2</span>
-        <h2>Create or find a task that suits you.</h2>
-      </div>
-      <div class="installation-steps--block">
-        <span>3</span>
-        <h2>Connect with the right person – done!</h2>
+      <div class="installation-steps--block" v-for="(step, key) in content.steps" :key="key">
+        <span>{{ step.number }}</span>
+        <h2>{{ isEnglish ? step.content_eng : step.content_de }}</h2>
       </div>
     </div>
   </div>

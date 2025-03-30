@@ -1,8 +1,83 @@
 <script setup>
 import { ref } from 'vue'
 import { Splide, SplideSlide } from '@splidejs/vue-splide'
+import { useLanguageStore } from '@/stores/store'
+import { computed } from 'vue'
+
+const languageStore = useLanguageStore()
+
+const isEnglish = computed(() => languageStore.language === 'eng')
 
 const selectedIndex = ref(0)
+
+const content = {
+  title: {
+    title_eng: 'Find or Offer Help – for Any Everyday Task',
+    title_de: 'Erhalte die Hilfe, die du brauchst  - schneller durch Dooin!"',
+  },
+  section: [
+    { title_eng: 'Offer a Job', title_de: 'Biete einen Job an' },
+    { title_eng: 'Find a Job', title_de: 'Finde einen Job' },
+  ],
+  content: [
+    [
+      [
+        {
+          title_eng: 'Quick Apartment Cleaning',
+          title_de: 'Schnelle Reinigung Deiner Wohnung',
+          description_eng:
+            'u hast keine Zeit, Deine Wohnung zu putzen? Poste einfach die Aufgabe und finde schnell jemanden, der Dir hilft, Deine Wohnung zu reinigen – ob für eine schnelle Reinigung oder eine gründliche Putzaktion.',
+          description_de:
+            'No time to clean your apartment? Post the task and quickly find someone who can help you clean – whether it’s a quick sweep or a thorough cleaning.',
+        },
+        {
+          title_eng: 'Get Your Shopping Done',
+          title_de: 'Einkäufe Erledigen lassen',
+          description_eng:
+            'Du hast keine Zeit, Deine Wohnung zu putzen? Poste einfach die Aufgabe und finde schnell jemanden, der Dir hilft, Deine Wohnung zu reinigen – ob für eine schnelle Reinigung oder eine gründliche Putzaktion.',
+          description_de:
+            'No time to clean your apartment? Post the task and quickly find someone who can help you clean – whether it’s a quick sweep or a thorough cleaning.',
+        },
+        {
+          title_eng: 'Volunteer Help for the Community',
+          title_de: 'Freiwillige Hilfe für die Nachbarschaft',
+          description_eng:
+            'Organize volunteer help for neighbors – such as cleaning out, shopping for seniors, or supporting refugee initiatives.',
+          description_de:
+            'Organisiere ehrenamtliche Hilfe für die Nachbarn – zum Beispiel beim Ausmisten, beim Einkaufen für Senioren oder bei der Unterstützung von Flüchtlingsinitiativen.',
+        },
+      ],
+    ],
+    [
+      [
+        {
+          title_eng: 'Do Shopping for Others',
+          title_de: 'Einkäufe für andere erledigen',
+          description_eng:
+            'Have time and enjoy shopping? Help your neighbors with their shopping and earn some money.',
+          description_de:
+            'Du hast Zeit und Lust, Einkäufe zu erledigen? Hilf Deinen Nachbarn, ihre Einkäufe zu erledigen und verdiene dabei etwas Geld.',
+        },
+        {
+          title_eng: 'Tech Support for Seniors',
+          title_de: 'Technischer Support für Senioren',
+          description_eng:
+            'Assist elderly people with their smartphones or setting up devices. Easy and direct through the app.',
+          description_de:
+            'Hilf älteren Menschen bei der Nutzung ihrer Smartphones oder beim Einrichten von Geräten. Einfach und direkt über die App.',
+        },
+        {
+          title_eng: 'Help with Moving',
+          title_de: 'Hilfe beim Umzug',
+          description_eng:
+            'Offer your help with moving – whether it’s carrying, packing, or transporting. The app connects you directly with people who need your assistance.',
+          description_de:
+            'Biete Deine Hilfe beim Umzug an – ob beim Tragen, Packen oder Transportieren. Die App verbindet Dich direkt mit Menschen, die Deine Unterstützung brauchen.',
+        },
+      ],
+    ],
+  ],
+}
 </script>
 
 <template>
@@ -12,18 +87,21 @@ const selectedIndex = ref(0)
         <p></p>
       </div>
       <div class="usage-info--description">
-        <h2>Find or Offer Help – for Any Everyday Task</h2>
+        <h2>{{ isEnglish ? content.title.title_eng : content.title.title_de }}</h2>
       </div>
       <div class="usage-info--menu flex">
-        <button @click="selectedIndex = 0" :class="{ active: selectedIndex === 0 }">
-          Offer a Job
-        </button>
-        <button @click="selectedIndex = 1" :class="{ active: selectedIndex === 1 }">
-          Find a Job
+        <button
+          v-for="(section, key) in content.section"
+          :key="key"
+          @click="selectedIndex = key"
+          :class="{ active: selectedIndex === key }"
+        >
+          {{ isEnglish ? section.title_eng : section.title_de }}
         </button>
       </div>
     </div>
-    <div v-if="selectedIndex == 0" class="">
+
+    <div v-for="(item, key) in content.content[selectedIndex]">
       <Splide
         :options="{
           type: 'loop',
@@ -35,128 +113,23 @@ const selectedIndex = ref(0)
           interval: 1500,
         }"
       >
-        <SplideSlide>
+        <SplideSlide v-for="slide in item">
           <div class="usage-block flex">
             <div class="usage-block--image">
               <img src="./../assets/block2.webp" alt="" />
             </div>
             <div class="usage-block--content flex">
               <div class="usage-block--content-title">
-                <h3>Schnelle Reinigung Deiner Wohnung</h3>
+                <h3>{{ isEnglish ? slide.title_eng : slide.title_de }}</h3>
               </div>
               <div class="usage-block--content-description">
                 <p>
-                  No time to clean your apartment? Post the task and quickly find someone who can
-                  help you clean – whether it’s a quick sweep or a thorough cleaning.
+                  {{ isEnglish ? slide.description_eng : slide.description_de }}
                 </p>
               </div>
             </div>
           </div></SplideSlide
         >
-        <SplideSlide
-          ><div class="usage-block flex image-left">
-            <div class="usage-block--image">
-              <img src="./../assets/block2.webp" alt="" />
-            </div>
-            <div class="usage-block--content flex">
-              <div class="usage-block--content-title">
-                <h3>Einkäufe Erledigen lassen</h3>
-              </div>
-              <div class="usage-block--content-description">
-                <p>
-                  UNeed groceries or other items urgently but don’t have time? Have a tasker do your
-                  shopping and bring the goods directly to your door."
-                </p>
-              </div>
-            </div>
-          </div></SplideSlide
-        >
-        <SplideSlide
-          ><div class="usage-block flex">
-            <div class="usage-block--image">
-              <img src="./../assets/block2.webp" alt="" />
-            </div>
-            <div class="usage-block--content flex">
-              <div class="usage-block--content-title">
-                <h3>Freiwillige Hilfe für die Nachbarschaft</h3>
-              </div>
-              <div class="usage-block--content-description">
-                <p>
-                  Organize volunteer help for neighbors – such as cleaning out, shopping for
-                  seniors, or supporting refugee initiatives."
-                </p>
-              </div>
-            </div>
-          </div></SplideSlide
-        >
-      </Splide>
-    </div>
-    <div v-if="selectedIndex == 1">
-      <Splide
-        :options="{
-          type: 'loop',
-          perPage: 1,
-          gap: '1rem',
-          autoplay: true,
-          arrows: false,
-          speed: 500,
-          interval: 1500,
-        }"
-      >
-        <SplideSlide
-          ><div class="usage-block flex">
-            <div class="usage-block--image">
-              <img src="./../assets/block2.webp" alt="" />
-            </div>
-            <div class="usage-block--content flex">
-              <div class="usage-block--content-title">
-                <h3>Do Shopping for Others</h3>
-              </div>
-              <div class="usage-block--content-description">
-                <p>
-                  Have time and enjoy shopping? Help your neighbors with their shopping and earn
-                  some money.
-                </p>
-              </div>
-            </div>
-          </div>
-        </SplideSlide>
-        <SplideSlide
-          ><div class="usage-block flex image-left">
-            <div class="usage-block--image">
-              <img src="./../assets/block2.webp" alt="" />
-            </div>
-            <div class="usage-block--content flex">
-              <div class="usage-block--content-title">
-                <h3>Tech Support for Seniors</h3>
-              </div>
-              <div class="usage-block--content-description">
-                <p>
-                  Assist elderly people with their smartphones or setting up devices. Easy and
-                  direct through the app.
-                </p>
-              </div>
-            </div>
-          </div>
-        </SplideSlide>
-        <SplideSlide
-          ><div class="usage-block flex">
-            <div class="usage-block--image">
-              <img src="./../assets/block2.webp" alt="" />
-            </div>
-            <div class="usage-block--content flex">
-              <div class="usage-block--content-title">
-                <h3>Help with Moving</h3>
-              </div>
-              <div class="usage-block--content-description">
-                <p>
-                  Offer your help with moving – whether it’s carrying, packing, or transporting. The
-                  app connects you directly with people who need your assistance.
-                </p>
-              </div>
-            </div>
-          </div>
-        </SplideSlide>
       </Splide>
     </div>
   </div>

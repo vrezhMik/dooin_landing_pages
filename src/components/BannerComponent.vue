@@ -1,18 +1,43 @@
 <script lang="ts" setup>
 import ThemeButton from './ThemeButton.vue'
+import { useLanguageStore } from '@/stores/store'
+const languageStore = useLanguageStore()
+const isEnglish = (): boolean => {
+  return languageStore.language === 'eng'
+}
+const content = {
+  title: {
+    name_eng: 'Find Help or Offer Yours',
+    name_de: 'Finde Hilfe oder biete Deine an – Schnell, Direkt und Zuverlässig!',
+  },
+  description: {
+    name_eng: 'Earn Money, Exchange Benefits, or Volunteer',
+    name_de: 'Verdiene Geld, tausche Vorteile oder hilf ehrenamtlich',
+  },
+  button_title: {
+    name_eng: 'Are You In?',
+    name_de: 'Bist Du dabei?',
+  },
+  button: {
+    name_eng: 'Register Now',
+    name_de: 'Jetzt Registrieren',
+  },
+}
 </script>
 
 <template>
   <div class="banner container">
     <div class="row">
-      <h1 class="banner-title green">Find Help or Offer Yours</h1>
+      <h1 class="banner-title green">
+        {{ isEnglish() ? content.title.name_eng : content.title.name_de }}
+      </h1>
     </div>
     <div class="row banner-description">
-      <p>Earn Money, Exchange Benefits, or Volunteer</p>
+      <p>{{ isEnglish() ? content.description.name_eng : content.description.name_de }}</p>
     </div>
     <div class="row flex banner-buttons">
-      <h3>Are You In?</h3>
-      <ThemeButton name="Register Now" />
+      <h3>{{ isEnglish() ? content.button_title.name_eng : content.button_title.name_de }}</h3>
+      <ThemeButton :name="content.button[isEnglish() ? 'name_eng' : 'name_de']" />
     </div>
     <div class="flex banner-image--container">
       <img src="./../assets/phone.png" alt="" />

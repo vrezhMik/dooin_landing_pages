@@ -1,7 +1,15 @@
 <script lang="ts" setup>
+import { useLanguageStore } from '@/stores/store'
+import InstagramIcon from './Icons/InstagramIcon.vue'
+import LinkedinIcon from './Icons/LinkedinIcon.vue'
+import { computed } from 'vue'
+
+const languageStore = useLanguageStore()
+
+const isEnglish = computed(() => languageStore.language === 'eng')
 const menuData = [
-  { href: '#product', name: 'product' },
-  { href: '#about', name: 'about' },
+  { href: '#product', name: 'product', name_de: 'rodukt' },
+  { href: '#about', name: 'about', name_de: 'Über uns' },
 ]
 </script>
 
@@ -11,19 +19,30 @@ const menuData = [
       <div class="row footer-content--info flex">
         <div class="footer-content--info-company flex">
           <a href="/"><span class="green">D</span>ooin</a>
-          <p>Everything is secure, direct, and fair. Pay through the platform or get paid.</p>
+          <p>
+            {{
+              isEnglish
+                ? 'Everything is secure, direct, and fair. Pay through the platform or get paid.'
+                : 'Alles ist sicher, direkt und fair. Bezahle über die Plattform oder lass Dich bezahlen.'
+            }}
+          </p>
         </div>
         <div class="footer-content--info-links flex">
           <div class="footer-content--info-links-menu menu-column">
             <h2>Product</h2>
             <nav>
-              <a :href="menu.href" v-for="menu in menuData" :class="['row']">{{ menu.name }}</a>
+              <a :href="menu.href" v-for="menu in menuData" :class="['row']">{{
+                isEnglish ? menu.name : menu.name_de
+              }}</a>
             </nav>
           </div>
           <div class="footer-content--info-links-social menu-column">
             <h2>Follow Us</h2>
             <nav>
-              <a :href="menu.href" v-for="menu in menuData" :class="['row']">{{ menu.name }}</a>
+              <a href="#" :class="['row']">
+                <InstagramIcon />
+              </a>
+              <a href="" :class="['row']"><LinkedinIcon /></a>
             </nav>
           </div>
         </div>
@@ -65,6 +84,17 @@ footer {
       }
       &-links {
         column-gap: 40px;
+        nav {
+          a {
+            max-width: 32px;
+            max-height: 32px;
+            svg {
+              path {
+                fill: #fff;
+              }
+            }
+          }
+        }
       }
     }
     &--copyright {

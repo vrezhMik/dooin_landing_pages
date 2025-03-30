@@ -1,19 +1,30 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useLanguageStore } from '@/stores/store'
+import { computed } from 'vue'
+
+const languageStore = useLanguageStore()
+
+const isEnglish = computed(() => languageStore.language === 'eng')
+
+const content = {
+  title_eng: 'Achieving More Together – The Idea Behind Dooin',
+  title_de: 'Gemeinsam mehr erreichen – die Idee hinter Dooin',
+  content_eng:
+    "In Germany, there is a strong willingness to help one another. However, we noticed that there was no platform connecting people directly – for the right tasks, at the right time, and in the right place. That's why we created Dooin. A platform that allows everyone to offer or receive help, simply and directly, without any intermediaries. Whether it's volunteer work or paid tasks – Dooin makes both possible.",
+  content_de:
+    'In Deutschland gibt es eine große Bereitschaft, sich gegenseitig zu helfen. Doch es fehlte uns an einer Plattform, die Menschen direkt miteinander verbindet – für die richtigen Aufgaben, zur richtigen Zeit und am richtigen Ort. Deshalb haben wir Dooin ins Leben gerufen. Eine Plattform, die es jedem ermöglicht, Hilfe anzubieten oder zu erhalten, ganz einfach und direkt, ohne Umwege. Ob ehrenamtliche Arbeit oder bezahlte Aufgaben – Dooin macht beides möglich.',
+}
+</script>
+
 <template>
   <div class="about" id="about">
     <div class="about-info">
       <div class="about-info--description">
-        <h2>Gemeinsam mehr erreichen – die Idee hinter Dooin</h2>
+        <h2>{{ isEnglish ? content.title_eng : content.title_de }}</h2>
       </div>
     </div>
     <div class="about-story">
-      <p>
-        In Germany, there is a strong willingness to help one another. However, we noticed that
-        there was no platform connecting people directly – for the right tasks, at the right time,
-        and in the right place. That's why we created Dooin. A platform that allows everyone to
-        offer or receive help, simply and directly, without any intermediaries. Whether it's
-        volunteer work or paid tasks – Dooin makes both possible.
-      </p>
+      <p>{{ isEnglish ? content.content_eng : content.content_de }}</p>
     </div>
   </div>
 </template>
