@@ -39,10 +39,10 @@ const menuData = [
           <div class="footer-content--info-links-social menu-column">
             <h2>Follow Us</h2>
             <nav>
-              <a href="#" :class="['row']">
+              <a href="#" :class="['row', 'social-icon']">
                 <InstagramIcon />
               </a>
-              <a href="" :class="['row']"><LinkedinIcon /></a>
+              <a href="" :class="['row', 'social-icon']"><LinkedinIcon /></a>
             </nav>
           </div>
         </div>
@@ -163,8 +163,18 @@ footer {
     }
     nav {
       flex-direction: row;
+      align-items: center;
       column-gap: 10px;
+      gap: 50px;
+      min-width: 200px;
+      a {
+        min-width: 100px;
+      }
     }
+  }
+  .social-icon {
+    width: 32px !important;
+    height: 32px !important;
   }
 }
 </style>

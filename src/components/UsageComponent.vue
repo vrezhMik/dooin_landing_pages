@@ -169,7 +169,7 @@ const content = {
       align-items: center;
       margin-bottom: 64px;
       button {
-        width: 30%;
+        min-width: 30%;
         font-size: 1rem;
         color: variables.$text-invert;
         border: 1px solid transparent;
@@ -246,7 +246,7 @@ const content = {
       &--menu {
         margin-bottom: 30px;
         button {
-          width: 41%;
+          width: 46%;
         }
       }
     }
@@ -270,7 +270,7 @@ const content = {
 @media (max-width: 470px) {
   .usage {
     &-info {
-      max-width: 80%;
+      max-width: 100%;
       &--description {
         h2 {
           font-size: 1.8rem;

@@ -108,7 +108,7 @@ const content = {
   border-radius: 30px;
   padding: 32px;
   &-info {
-    max-width: 50%;
+    max-width: 100%;
     margin: 0 auto;
     text-align: center;
     color: variables.$text-secondary;
@@ -132,9 +132,12 @@ const content = {
       column-gap: 0.8rem;
       justify-content: center;
       align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
       margin-bottom: 64px;
       button {
-        min-width: 100px;
+        min-width: 130px;
         width: 100%;
         font-size: 1rem;
         color: variables.$text-invert;
@@ -197,7 +200,7 @@ const content = {
         flex-wrap: wrap;
         row-gap: 20px;
         button {
-          width: 30%;
+          width: 70%;
         }
       }
     }
@@ -213,14 +216,14 @@ const content = {
         }
       }
       &--content {
-        width: 40%;
+        width: 80%;
         &-title {
           h3 {
-            font-size: 1.25rem;
+            font-size: 2rem;
           }
         }
         &-description {
-          font-size: 0.8rem;
+          font-size: 1.1rem;
         }
       }
     }

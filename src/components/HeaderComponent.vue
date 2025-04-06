@@ -159,6 +159,13 @@ header {
   height: 30px;
 }
 
+.header-lang-menu {
+  button {
+    font-size: 1rem;
+    color: #0f424c;
+  }
+}
+
 .hamburger-menu {
   position: relative;
   nav {

@@ -10,6 +10,7 @@ const props = defineProps(['name'])
 @use './../styles/variables' as variables;
 
 button {
+  min-width: 150px;
   padding: 1rem 2rem;
   font-size: 0.9rem;
   border: 1px solid variables.$primary-grey;
